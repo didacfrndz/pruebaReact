@@ -1,42 +1,294 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
+* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
+			body {
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+					Ubuntu, Cantarell, sans-serif;
+				background-color: #f5f5f5;
+				padding: 20px;
+			}
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+			.container {
+				display: flex;
+				gap: 20px;
+				max-width: 1400px;
+				margin: 0 auto;
+			}
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
+			/* Columna Izquierda - Lista de Cervezas */
+			.columna-izquierda {
+				width: 400px;
+				background-color: white;
+				border-radius: 8px;
+				padding: 20px;
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+				transition: all 0.3s ease;
+			}
 
-.card {
-  padding: 2em;
-}
+			.columna-izquierda.oculta {
+				display: none;
+			}
 
-.read-the-docs {
-  color: #888;
-}
+			.btn-toggle {
+				background-color: #6c757d;
+				color: white;
+				border: none;
+				padding: 10px 20px;
+				border-radius: 4px;
+				cursor: pointer;
+				margin-bottom: 15px;
+				font-size: 14px;
+			}
+
+			.btn-toggle:hover {
+				background-color: #5a6268;
+			}
+
+			.columna-izquierda h2 {
+				color: #333;
+				margin-bottom: 15px;
+				font-size: 24px;
+			}
+
+			.tabla-cervezas {
+				width: 100%;
+				border-collapse: collapse;
+			}
+
+			.tabla-cervezas th {
+				background-color: #f8f9fa;
+				padding: 10px;
+				text-align: left;
+				border-bottom: 2px solid #dee2e6;
+				font-weight: 600;
+				color: #495057;
+			}
+
+			.tabla-cervezas td {
+				padding: 12px;
+				border-bottom: 1px solid #dee2e6;
+			}
+
+			.tabla-cervezas tr:hover {
+				background-color: #f8f9fa;
+			}
+
+			.foto-cerveza {
+				width: 100px;
+				height: 100px;
+				object-fit: cover;
+				border-radius: 4px;
+				background-color: #e9ecef;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: #6c757d;
+				font-size: 12px;
+			}
+
+			/* Columna Derecha */
+			.columna-derecha {
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				gap: 20px;
+			}
+
+			/* Barra de Control */
+			.barra-control {
+				background-color: #e9ecef;
+				padding: 20px;
+				border-radius: 8px;
+				display: flex;
+				align-items: center;
+				gap: 15px;
+				flex-wrap: wrap;
+			}
+
+			.barra-control select,
+			.barra-control button {
+				padding: 10px 15px;
+				border: 1px solid #ced4da;
+				border-radius: 4px;
+				font-size: 14px;
+			}
+
+			.barra-control select {
+				flex: 1;
+				min-width: 150px;
+				background-color: white;
+			}
+
+			.barra-control .btn-pedido {
+				background-color: #007bff;
+				color: white;
+				border: none;
+				padding: 10px 30px;
+				cursor: pointer;
+				font-weight: 600;
+			}
+
+			.barra-control .btn-pedido:hover {
+				background-color: #0056b3;
+			}
+
+			/* Área de Mesas */
+			.area-mesas {
+				background-color: #e9ecef;
+				padding: 30px;
+				border-radius: 8px;
+				display: flex;
+				gap: 20px;
+				flex-wrap: wrap;
+				justify-content: center;
+			}
+
+			.mesa {
+				width: 200px;
+				height: 200px;
+				background-color: white;
+				border-radius: 50%;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: flex-start;
+				padding: 20px;
+				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+				cursor: pointer;
+				transition: transform 0.2s ease, box-shadow 0.2s ease;
+				position: relative;
+				overflow-y: auto;
+			}
+
+			.mesa:hover {
+				transform: scale(1.05);
+				box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+			}
+
+			.mesa-label {
+				font-weight: 600;
+				color: #007bff;
+				margin-bottom: 10px;
+				font-size: 16px;
+			}
+
+			.pedidos-mesa {
+				width: 100%;
+				text-align: center;
+				font-size: 12px;
+				color: #495057;
+			}
+
+			.pedido-item {
+				margin: 5px 0;
+				padding: 3px 0;
+			}
+
+			/* Modal */
+			.modal {
+				display: flex;
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0, 0, 0, 0.5);
+				z-index: 1000;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.modal.mostrar {
+				display: flex;
+			}
+
+			.modal-contenido {
+				background-color: white;
+				border-radius: 8px;
+				padding: 30px;
+				max-width: 600px;
+				width: 90%;
+				max-height: 80vh;
+				overflow-y: auto;
+				box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+				position: relative;
+			}
+
+			.modal-cerrar {
+				position: absolute;
+				top: 15px;
+				right: 15px;
+				background: none;
+				border: none;
+				font-size: 24px;
+				cursor: pointer;
+				color: #6c757d;
+				width: 30px;
+				height: 30px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.modal-cerrar:hover {
+				color: #333;
+			}
+
+			.modal h2 {
+				margin-bottom: 20px;
+				color: #333;
+			}
+
+			.tabla-pedidos {
+				width: 100%;
+				border-collapse: collapse;
+				margin-bottom: 20px;
+			}
+
+			.tabla-pedidos th {
+				background-color: #f8f9fa;
+				padding: 12px;
+				text-align: left;
+				border-bottom: 2px solid #dee2e6;
+				font-weight: 600;
+				color: #495057;
+			}
+
+			.tabla-pedidos td {
+				padding: 10px 12px;
+				border-bottom: 1px solid #dee2e6;
+			}
+
+			.total-acumulado {
+				text-align: right;
+				font-size: 18px;
+				font-weight: 600;
+				color: #007bff;
+				margin-top: 15px;
+				padding-top: 15px;
+				border-top: 2px solid #dee2e6;
+			}
+
+			/* Responsive */
+			@media (max-width: 768px) {
+				.container {
+					flex-direction: column;
+				}
+
+				.columna-izquierda {
+					width: 100%;
+				}
+
+				.area-mesas {
+					flex-direction: column;
+					align-items: center;
+				}
+
+				.mesa {
+					width: 180px;
+					height: 180px;
+				}
+			}
